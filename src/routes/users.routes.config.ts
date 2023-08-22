@@ -1,14 +1,14 @@
-import express from 'express';
+import { Application } from 'express';
 import { CommonRoutesConfig } from './common.routes.config';
 import UsersController from '../controllers/users.controllers';
 import { body } from 'express-validator';
 
 export class UsersRoutes extends CommonRoutesConfig {
-  constructor(app: express.Application) {
+  constructor(app: Application) {
     super(app, 'UsersRoutes');
   }
 
-  configureRoutes(): express.Application {
+  configureRoutes(): Application {
     this.app
       .route('users')
       .post(

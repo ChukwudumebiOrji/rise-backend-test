@@ -1,6 +1,7 @@
 import { errorHandler } from './src/middlewares/error.middleware';
-import { AdminsRoutes } from './src/routes/admins.routes.config';
+import { notFoundHandler } from './src/middlewares/notFound.middleware';
 import { CommonRoutesConfig } from './src/routes/common.routes.config';
+import { AdminsRoutes } from './src/routes/admins.routes.config';
 import { FilesRoutes } from './src/routes/files.routes.config';
 import { FoldersRoutes } from './src/routes/folders.routes.config';
 import { UsersRoutes } from './src/routes/users.routes.config';
@@ -17,9 +18,11 @@ const routes: Array<CommonRoutesConfig> = [
 ]; // to hold all route objects
 
 app.use(errorHandler);
+app.use(notFoundHandler);
 
 app.listen(PORT, async () => {
   routes.forEach(route => {
+    route.configureRoutes();
     console.log(`Routes configured for ${route.getName()}`);
   });
 
