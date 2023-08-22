@@ -1,23 +1,36 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const error_middleware_1 = require("./src/middlewares/error.middleware");
-const admins_config_1 = require("./src/routes/admins.config");
-const files_config_1 = require("./src/routes/files.config");
+const admins_routes_config_1 = require("./src/routes/admins.routes.config");
+const files_routes_config_1 = require("./src/routes/files.routes.config");
 const folders_routes_config_1 = require("./src/routes/folders.routes.config");
-const users_routes_config_1 = require("./src/routes/users.routes.config");
+const users_routes_config_1 = __importDefault(require("./src/routes/users.routes.config"));
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const routes = [
-    new users_routes_config_1.UsersRoutes(app),
-    new files_config_1.FilesRoutes(app),
+    new users_routes_config_1.default(app),
+    new files_routes_config_1.FilesRoutes(app),
     new folders_routes_config_1.FoldersRoutes(app),
-    new admins_config_1.AdminsRoutes(app),
+    new admins_routes_config_1.AdminsRoutes(app),
 ]; // to hold all route objects
 app.use(error_middleware_1.errorHandler);
-app.listen(PORT, () => {
+app.listen(PORT, () => __awaiter(void 0, void 0, void 0, function* () {
     routes.forEach(route => {
+        route.configureRoutes();
         console.log(`Routes configured for ${route.getName()}`);
     });
     console.log(`Listening on port ${PORT}`);
-});
+}));

@@ -1,5 +1,7 @@
 import express from 'express';
 import { CommonRoutesConfig } from './common.routes.config';
+import UsersController from '../controllers/users.controllers';
+import { body } from 'express-validator';
 
 export class UsersRoutes extends CommonRoutesConfig {
   constructor(app: express.Application) {
@@ -7,7 +9,14 @@ export class UsersRoutes extends CommonRoutesConfig {
   }
 
   configureRoutes(): express.Application {
-    this.app.route('users').post();
+    this.app
+      .route('users')
+      .post(
+        body('full_name').isString(),
+        body('email').isEmail(),
+        body('password').isString(),
+        UsersController.createUser
+      );
 
     return this.app;
   }
