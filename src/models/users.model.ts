@@ -1,29 +1,34 @@
-const Sequelize = require('sequelize');
+import dbConfig from '../config/db';
+import { DataTypes } from 'sequelize';
 
-const db = new Sequelize('database_name', 'username', 'password', {
-  host: 'localhost',
-  dialect: 'postgres',
-});
-
-const UserModel = db.define('users', {
+const UserModel = dbConfig.sq.define('users', {
   id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
+  user_id: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
   full_name: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   email: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     unique: true,
     allowNull: false,
   },
   password: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false,
   },
+});
+
+UserModel.sync({ alter: true }).then(() => {
+  console.log('User Model synced');
 });
 
 export default UserModel;

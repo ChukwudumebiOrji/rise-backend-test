@@ -7,9 +7,9 @@ export class AdminsRoutes extends CommonRoutesConfig {
   }
 
   configureRoutes(): express.Application {
-    this.app.route('admins').get().post();
+    this.app.route('/admins').get().post();
 
-    this.app.route('admins/:id').get().delete();
+    this.app.route('/admins/:id').get().delete();
 
     return this.app;
   }

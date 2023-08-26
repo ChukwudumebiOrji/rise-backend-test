@@ -1,0 +1,17 @@
+POST /users - Create a new user account.
+POST /files - Upload a file.
+GET /files - List all files.
+GET /files/:id - Get a specific file.
+DELETE /files/:id - Delete a file.
+POST /folders - Create a new folder.
+GET /folders - List all folders.
+GET /folders/:id - Get a specific folder.
+DELETE /folders/:id - Delete a folder.
+POST /admins - Create a new admin user account.
+GET /admins - List all admin user accounts.
+GET /admins/:id - Get a specific admin user account.
+DELETE /admins/:id - Delete a specific admin user account.
+PUT /files/:id/unsafe - Mark a file as unsafe.
+DELETE /files/:id/unsafe - Unmark a file as unsafe.
+GET /files/unsafe - List all unsafe files.
+GET /files/unsafe/:id - Get a specific unsafe file.

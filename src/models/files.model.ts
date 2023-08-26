@@ -1,29 +1,37 @@
-const Sequelize = require('sequelize');
+import dbConfig from '../config/db';
+import { DataTypes } from 'sequelize';
 
-const db = new Sequelize('database_name', 'username', 'password', {
-  host: 'localhost',
-  dialect: 'postgres',
-});
-
-const FileModel = db.define('users', {
+const FileModel = dbConfig.sq.define('files', {
   id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  full_name: {
-    type: Sequelize.STRING,
+  file_id: {
+    type: DataTypes.STRING,
     allowNull: false,
-  },
-  email: {
-    type: Sequelize.STRING,
     unique: true,
+  },
+  name: {
+    type: DataTypes.STRING,
     allowNull: false,
   },
-  password: {
-    type: Sequelize.STRING,
+  data: {
+    type: DataTypes.BLOB,
     allowNull: false,
   },
+  size: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  type: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+});
+
+FileModel.sync({ alter: true }).then(() => {
+  console.log('FILE MODEL SYNCED');
 });
 
 export default FileModel;

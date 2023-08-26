@@ -1,6 +1,6 @@
-import { Application } from 'express';
+import { Application, Request } from 'express';
 import { CommonRoutesConfig } from './common.routes.config';
-import UsersController from '../controllers/users.controllers';
+import UsersController from '../controllers/users.controller';
 import { body } from 'express-validator';
 
 export class UsersRoutes extends CommonRoutesConfig {
@@ -10,7 +10,7 @@ export class UsersRoutes extends CommonRoutesConfig {
 
   configureRoutes(): Application {
     this.app
-      .route('users')
+      .route('/users')
       .post(
         body('full_name').isString(),
         body('email').isEmail(),
