@@ -1,6 +1,7 @@
 import dbConfig from '../config/db';
 import { DataTypes } from 'sequelize';
 
+// Creates the Folder model
 const FolderModel = dbConfig.sq.define('folders', {
   id: {
     type: DataTypes.INTEGER,
@@ -11,10 +12,22 @@ const FolderModel = dbConfig.sq.define('folders', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  files: {
+    type: DataTypes.ARRAY(DataTypes.INTEGER),
+    allowNull: false,
+  },
+  user: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'users',
+      key: 'id',
+    },
+  },
 });
 
 FolderModel.sync({ alter: true }).then(() => {
-  console.log('Folder Model synced');
+  console.log('FOLDER MODEL SYNCED');
 });
 
 export default FolderModel;

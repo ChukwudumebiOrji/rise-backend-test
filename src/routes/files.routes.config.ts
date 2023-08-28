@@ -11,15 +11,25 @@ export class FilesRoutes extends CommonRoutesConfig {
   }
 
   configureRoutes(): express.Application {
+    /*
+    This route is used to upload a file.
+    */
     this.app.route('/files').post(upload.single(), filesController.saveFile);
 
-    this.app.route('/files/:id').get(filesController.downloadFile).delete();
+    /*
+    This route is used to download a file.
+    */
+    this.app.route('/files/:id').get(filesController.downloadFile);
 
-    this.app.route('/files/:id/unsafe').put().delete();
+    /*
+    This route is used to stream a file.
+    */
+    this.app.route('/files/:id/stream').get(filesController.streamMedia);
 
-    this.app.route('/files/unsafe').get();
-
-    this.app.route('/files/unsafe/:id').get();
+    /*
+    This route is used to mark a file as unsafe and delete it.
+    */
+    this.app.route('/files/:id/unsafe').put(filesController.markFilesUnsafe, filesController.deleteFile);
 
     return this.app;
   }

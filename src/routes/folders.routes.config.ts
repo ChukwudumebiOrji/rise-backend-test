@@ -8,9 +8,10 @@ export class FoldersRoutes extends CommonRoutesConfig {
   }
 
   configureRoutes(): express.Application {
-    this.app.route('/folders').get().post(foldersController.createFolder);
-
-    this.app.route('/folders/:id').get().delete();
+    /*
+    This route is used to create a folder.
+    */
+    this.app.route('/folders').post(foldersController.createFolder);
 
     return this.app;
   }

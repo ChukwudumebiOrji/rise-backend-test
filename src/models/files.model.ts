@@ -1,18 +1,18 @@
 import dbConfig from '../config/db';
 import { DataTypes } from 'sequelize';
 
+// Creates the File model
 const FileModel = dbConfig.sq.define('files', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  file_id: {
+  name: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
   },
-  name: {
+  path: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -27,6 +27,11 @@ const FileModel = dbConfig.sq.define('files', {
   type: {
     type: DataTypes.STRING,
     allowNull: false,
+  },
+  is_unsafe: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
   },
 });
 

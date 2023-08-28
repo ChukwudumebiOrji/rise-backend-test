@@ -17,7 +17,7 @@ class UsersController {
       password: hash,
       user_id: id,
     });
-    res.json({ id: newUser.user_id });
+    res.json({ message: `User ${id} successfully created.` });
   }
 }
 

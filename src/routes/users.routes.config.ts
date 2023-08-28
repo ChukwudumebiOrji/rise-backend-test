@@ -9,6 +9,9 @@ export class UsersRoutes extends CommonRoutesConfig {
   }
 
   configureRoutes(): Application {
+    /*
+    This route is used to create a user.
+    */
     this.app
       .route('/users')
       .post(
